@@ -13,19 +13,19 @@ clock = 1
 
 def previsit(v):
     global clock
-    print(f"Pre visit{v} : {clock}")
     pre[v] = clock
+    print(f"Pre visit{v} : {clock}")
     clock += 1
 
 def postvisit(v):
     global clock
-    print(f"Post visit {v} : {clock}")
     post[v] = clock
+    print(f"Post visit {v} : {clock}")
     clock += 1
 
 def explore(v):
-    previsit(v)
     visited[v] = True
+    previsit(v)
     for nbr in graph[v]:
         if not visited.get(nbr, False):
             explore(nbr)
@@ -37,3 +37,19 @@ for v in graph:
 
 print("Pre visit:", pre)
 print("Post visit:", post)
+
+def relation(u, v):
+
+    if pre[u] < pre[v] and post[v] < post[u]:
+        return f"{v} is nested inside {u}."
+    elif post[u] < pre[v] or post[v] < pre[u]:
+        return f"{u} and {v} are disjoint."
+    elif pre[v] < pre[u] and post[u] < post[v]:
+        return f"Back edge detected: {u} -> {v}" 
+    else:
+        return "Other case."
+
+
+print(relation("u","v"))
+print(relation("u","x"))
+print(relation("w","u"))
