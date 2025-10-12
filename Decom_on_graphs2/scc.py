@@ -34,6 +34,7 @@ def strongly_connected_components(graph):
     def dfs_original(v, component):
         visited_g[v] = True
         component.append(v)
+        
         for neighbor in graph[v]:
             if neighbor not in visited_g:
                 dfs_original(neighbor, component)
