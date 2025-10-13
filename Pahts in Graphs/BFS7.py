@@ -30,8 +30,9 @@ graph = {
     'F': ['C', 'E']
 }
 
+
+# Run BFS from node 'A'
 distances = bfs(graph, 'A')
 
 for node, d in distances.items():
-    print(f"Distance from A to node {node} :", d)
-
+    print(f"Distance from A to {node}: {d}")
