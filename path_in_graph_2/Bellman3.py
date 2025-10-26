@@ -2,6 +2,7 @@ def bellman_ford(graph, start):
 
     dist = {}
     prev = {}
+
     for node in graph:
         dist[node] = float("inf")
         prev[node] = None
@@ -17,19 +18,20 @@ def bellman_ford(graph, start):
     for u in graph:
         for v in graph[u]:
             if dist[v] > dist[u] + graph[u][v]:
-                print("Negative weight cycle detected")
+                print("Negative weight cycle detected.")
                 return None, None
     
     return dist, prev
 
 def construct_path(prev, start, target):
+
     path = []
     u = target
-    while u is not None:
+
+    while u:
         path.append(u)
         u = prev[u]
-    path.reverse()
-
+    
     if path[0] != start:
         return None
     
@@ -51,5 +53,4 @@ if dist and prev:
         if node != 'A':
             path = construct_path(prev, 'A', node)
             print(f"A → {node}: {path}, total cost = {dist[node]}")
-
 

@@ -23,11 +23,14 @@ def bellman_ford(graph, start):
     return dist, prev
 
 def construct_path(prev, start, target):
+
     path = []
     u = target
-    while u is not None:
+
+    while u:
         path.append(u)
         u = prev[u]
+    
     path.reverse()
 
     if path[0] != start:
@@ -51,5 +54,4 @@ if dist and prev:
         if node != 'A':
             path = construct_path(prev, 'A', node)
             print(f"A → {node}: {path}, total cost = {dist[node]}")
-
 
